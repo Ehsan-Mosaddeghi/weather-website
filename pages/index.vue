@@ -1,25 +1,42 @@
 <script lang="ts" setup>
 const city = ref("");
 
-console.log(city.value);
-const { data } = await useFetch(
-  "https://api.openweathermap.org/data/2.5/weather?q=Tabriz&appid=c964efd57b53dde7f041a3b7beece2a2"
-);
+const weatherData: any = ref(null);
+const loading = ref(false);
 
-function handle(e) {
-  e.preventDefault();
+async function handleWeather() {
+  try {
+    loading.value = true;
+    const data = await $fetch(
+      `https://api.weatherapi.com/v1/forecast.json?key=d590b84790384cc6b74135915240110&q=Tehran&days=4&aqi=no&alerts=no
+`
+    );
 
-  const city = e.target.city.value;
+    weatherData.value = data;
+    console.log(weatherData.value);
+  } catch {
+  } finally {
+    city.value = "";
+    loading.value = false;
+  }
 }
 </script>
 
 <template>
   <main>
-    <div class="flex justify-center" @submit="handle">
-      <UFormGroup label="City">
-        <UInput placeholder="Search your city..." icon="i-heroicons-pencil" />
-      </UFormGroup>
+    <div class="flex justify-center">
+      <form @submit.prevent="handleWeather">
+        <UInput
+          placeholder="Search your city..."
+          icon="i-heroicons-pencil"
+          v-model="city"
+        />
+      </form>
     </div>
+
+    <!-- <div>Name: {{ weatherData }}</div> -->
+    <Spinner v-if="loading" />
+    <Weather v-if="weatherData" :weatherData="weatherData" />
 
     <!-- <div v-for="movie in movies" :key="movie.imdbID">
     <p>
