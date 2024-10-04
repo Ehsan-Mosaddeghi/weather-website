@@ -9,7 +9,7 @@ const {
 <template>
   <div class="space-y-10">
     <div class="flex justify-center items-end">
-      <h1 class="text-8xl">{{ temp }}°</h1>
+      <h1 class="text-8xl">{{ formatTemp(temp) }}</h1>
 
       <div class="text-xl">
         <p>

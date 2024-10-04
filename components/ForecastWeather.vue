@@ -17,8 +17,10 @@ console.log(temp, name, country, forecastday);
       :key="date"
       class="p-4 flex flex-col border border-gray-300 rounded-md shadow-md w-64 items-center"
     >
-      <p>{{ day.avgtemp_c }}</p>
+      <img :src="`https:${day.condition.icon}`" alt="" />
+      <p>{{ formatTemp(day.avgtemp_c) }}</p>
       <p>{{ day.avghumidity }}%</p>
+      <p>{{ day.condition.text }}</p>
       <p>{{ date }}</p>
     </div>
   </div>
