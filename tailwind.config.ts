@@ -4,9 +4,13 @@ export default {
   content: [],
   theme: {
     extend: {
-      backgroundColor: {
-        primary: "#123",
+      backgroundImage: {
+        rainy: "url('/bg-rainy.jpg')",
+        sunny: "url('/bg-sunny.jpg')",
       },
+      // backgroundColor: {
+      //   primary: "#123",
+      // },
     },
   },
   plugins: [],

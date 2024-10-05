@@ -5,6 +5,8 @@ const weatherData: any = ref(null);
 const loading = ref(false);
 const error: any = ref("");
 
+const backgroundImage: any = ref("");
+
 async function handleWeather() {
   try {
     loading.value = true;
@@ -19,6 +21,7 @@ async function handleWeather() {
         `https://api.weatherapi.com/v1/forecast.json?key=d590b84790384cc6b74135915240110&q=${city.value}&days=6&aqi=no&alerts=no`
       )
     );
+    console.log(data.value);
 
     if (status.value === "error")
       throw new Error(errorApi.value?.data?.error?.message);
@@ -35,6 +38,19 @@ async function handleWeather() {
 
 <template>
   <div>
+    <Transition name="background">
+      <div
+        class="bg-cover -z-10 absolute w-full h-full bg-no-repeat"
+        :key="weatherData"
+        :class="{
+          'bg-sunny': weatherData?.current?.cloud <= 10,
+          'bg-rainy': weatherData?.current?.cloud > 10,
+        }"
+      ></div>
+    </Transition>
+    <header class="text-center py-5">
+      <h1 class="text-3xl">Weather Now</h1>
+    </header>
     <div class="flex justify-center">
       <form @submit.prevent="handleWeather" class="text-center flex">
         <UInput
@@ -53,7 +69,6 @@ async function handleWeather() {
     <!-- <div>Name: {{ weatherData }}</div> -->
     <!-- <Spinner v-if="loading" /> -->
 
-    <p v-if="error">{{ error }}</p>
     <Error v-if="error" :message="error" />
 
     <Transition name="weather" mode="out-in">
@@ -66,13 +81,6 @@ async function handleWeather() {
         <ForecastWeather :weatherData="weatherData" />
       </Main>
     </Transition>
-
-    <!-- <div v-for="movie in movies" :key="movie.imdbID">
-    <p>
-      {{ movie.Title }}
-    </p>
-    <img :src="movie.Poster" alt="" />
-  </div> -->
   </div>
 </template>
 
@@ -89,14 +97,23 @@ async function handleWeather() {
   animation: bounce-in 0.5s reverse;
 }
 
+.background-enter-active,
+.background-leave-active {
+  transition: all 2s linear;
+}
+.background-enter-from,
+.background-leave-to {
+  opacity: 0;
+}
+
 @keyframes bounce-in {
   0% {
-    transform: translateY(100svh);
+    transform: translateX(100px);
     opacity: 0;
   }
 
   100% {
-    transform: translateY(0);
+    transform: translateX(0);
     opacity: 1;
   }
 }
