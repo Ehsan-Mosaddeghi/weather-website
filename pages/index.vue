@@ -5,8 +5,6 @@ const weatherData: any = ref(null);
 const loading = ref(false);
 const error: any = ref("");
 
-const backgroundImage: any = ref("");
-
 async function handleWeather() {
   try {
     loading.value = true;
