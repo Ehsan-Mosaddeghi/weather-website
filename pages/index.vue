@@ -46,8 +46,9 @@ async function handleWeather() {
         :src="`/${background}.jpg`"
         :key="background"
         quality="50"
+        width="100%"
+        height="100%"
         fit="cover"
-        size="100vw"
         loading="eager"
         class="absolute -z-10"
       />
