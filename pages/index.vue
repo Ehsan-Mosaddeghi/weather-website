@@ -4,26 +4,21 @@ const city = ref("");
 const weatherData: any = ref(null);
 const loading = ref(false);
 const error: any = ref("");
-const background = ref("");
+const background = ref("bg-main");
 
 async function handleWeather() {
   try {
     loading.value = true;
     error.value = "";
 
-    const {
-      data,
-      status,
-      error: errorApi,
-    } = await useAsyncData("weather", () =>
+    const { data, status, error: errorApi } = await useAsyncData("weather", () =>
       $fetch(
         `https://api.weatherapi.com/v1/forecast.json?key=d590b84790384cc6b74135915240110&q=${city.value}&days=6&aqi=no&alerts=no`
       )
     );
     console.log(data.value);
 
-    if (status.value === "error")
-      throw new Error(errorApi.value?.data?.error?.message);
+    if (status.value === "error") throw new Error(errorApi.value?.data?.error?.message);
 
     weatherData.value = data.value;
 
@@ -69,10 +64,7 @@ async function handleWeather() {
 
         <UButton label="Search..." type="submit" color="lime">
           <template #trailing>
-            <UIcon
-              name="i-heroicons-paper-airplane"
-              class="w-5 h-5"
-            /> </template
+            <UIcon name="i-heroicons-paper-airplane" class="w-5 h-5" /> </template
         ></UButton>
       </form>
     </div>

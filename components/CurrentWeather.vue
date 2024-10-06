@@ -13,17 +13,17 @@ const {
 
       <div class="text-2xl">
         <p>
-          <UIcon name="i-mdi-weather-windy" class="text-stone-500" />
+          <UIcon name="i-mdi-weather-windy" />
           <span>{{ wind }} mph</span>
         </p>
         <p>
-          <UIcon name="i-lets-icons-humidity-light" class="text-blue-500" />
+          <UIcon name="i-lets-icons-humidity-light" />
           <span>{{ humidity }}%</span>
         </p>
       </div>
     </div>
 
-    <p class="text-2xl flex justify-center items-center text-green-400">
+    <p class="text-2xl flex justify-center items-center">
       <span>
         {{ condition.text }}
       </span>

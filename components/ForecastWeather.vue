@@ -15,7 +15,18 @@ const weekDays = [
   "Saturday",
 ];
 
-const convertedForecast = forecastday.map((day) => ({
+interface forecastProps {
+  date: string;
+  day: {
+    avgtemp_c: number;
+    avghumidity: number;
+    condition: {
+      icon: string;
+      text: string;
+    };
+  };
+}
+const convertedForecast = forecastday.map((day: forecastProps) => ({
   day: weekDays[new Date(day.date).getDay()],
   date: day.date,
   temp: day.day.avgtemp_c,
