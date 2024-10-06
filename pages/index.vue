@@ -4,6 +4,7 @@ const city = ref("");
 const weatherData: any = ref(null);
 const loading = ref(false);
 const error: any = ref("");
+const background = ref("");
 
 async function handleWeather() {
   try {
@@ -25,6 +26,10 @@ async function handleWeather() {
       throw new Error(errorApi.value?.data?.error?.message);
 
     weatherData.value = data.value;
+
+    weatherData.value?.current?.cloud <= 10
+      ? (background.value = "bg-sunny")
+      : (background.value = "bg-rainy");
   } catch (err: any) {
     error.value = err.message;
   } finally {
@@ -37,30 +42,38 @@ async function handleWeather() {
 <template>
   <div>
     <Transition name="background">
-      <div
-        class="bg-cover -z-10 absolute w-full h-full bg-no-repeat"
-        :key="weatherData"
-        :class="{
-          'bg-sunny': weatherData?.current?.cloud <= 10,
-          'bg-rainy': weatherData?.current?.cloud > 10,
-        }"
-      ></div>
+      <NuxtImg
+        :src="`/${background}.jpg`"
+        :key="background"
+        quality="50"
+        fit="cover"
+        loading="eager"
+        class="absolute -z-10"
+      />
     </Transition>
     <header class="text-center py-5">
-      <h1 class="text-3xl">Weather Now</h1>
+      <h1 class="text-5xl">Weather Now</h1>
     </header>
-    <div class="flex justify-center">
-      <form @submit.prevent="handleWeather" class="text-center flex">
+    <div class="flex justify-center mb-8">
+      <form @submit.prevent="handleWeather" class="text-center flex font-sans">
         <UInput
           :loading="loading"
           required
           autofocus
+          size="xl"
           placeholder="Search your city..."
-          icon="i-heroicons-pencil"
+          icon="i-heroicons-pencil-square"
           v-model="city"
+          color="gray"
         />
 
-        <UButton type="submit" color="green"> Search... </UButton>
+        <UButton label="Search..." type="submit" color="lime">
+          <template #trailing>
+            <UIcon
+              name="i-heroicons-paper-airplane"
+              class="w-5 h-5"
+            /> </template
+        ></UButton>
       </form>
     </div>
 

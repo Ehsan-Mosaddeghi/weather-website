@@ -11,18 +11,19 @@ const {
     <div class="flex justify-center items-end">
       <h1 class="text-8xl">{{ formatTemp(temp) }}</h1>
 
-      <div class="text-xl">
+      <div class="text-2xl">
         <p>
-          <UIcon name="i-mdi-weather-windy" /> <span>{{ wind }} mph</span>
+          <UIcon name="i-mdi-weather-windy" class="text-stone-500" />
+          <span>{{ wind }} mph</span>
         </p>
         <p>
-          <UIcon name="i-lets-icons-humidity-light" />
+          <UIcon name="i-lets-icons-humidity-light" class="text-blue-500" />
           <span>{{ humidity }}%</span>
         </p>
       </div>
     </div>
 
-    <p class="text-2xl flex justify-center items-center">
+    <p class="text-2xl flex justify-center items-center text-green-400">
       <span>
         {{ condition.text }}
       </span>
