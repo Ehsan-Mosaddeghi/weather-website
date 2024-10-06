@@ -45,7 +45,7 @@ async function handleWeather() {
       <NuxtImg
         :src="`/${background}.jpg`"
         :key="background"
-        quality="50"
+        quality="100"
         fit="cover"
         loading="eager"
         class="absolute -z-10 w-full h-svh"
