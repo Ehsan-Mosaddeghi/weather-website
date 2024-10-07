@@ -11,14 +11,19 @@ async function handleWeather() {
     loading.value = true;
     error.value = "";
 
-    const { data, status, error: errorApi } = await useAsyncData("weather", () =>
+    const {
+      data,
+      status,
+      error: errorApi,
+    } = await useAsyncData("weather", () =>
       $fetch(
         `https://api.weatherapi.com/v1/forecast.json?key=d590b84790384cc6b74135915240110&q=${city.value}&days=6&aqi=no&alerts=no`
       )
     );
     console.log(data.value);
 
-    if (status.value === "error") throw new Error(errorApi.value?.data?.error?.message);
+    if (status.value === "error")
+      throw new Error(errorApi.value?.data?.error?.message);
 
     weatherData.value = data.value;
 
@@ -42,7 +47,9 @@ async function handleWeather() {
       <NuxtImg
         :src="`/${background}.jpg`"
         :key="background"
+        :placeholder="[50, 25, 50, 5]"
         quality="80"
+        format="webp"
         fit="cover"
         loading="lazy"
         class="absolute -z-10 w-full h-svh"
@@ -66,7 +73,10 @@ async function handleWeather() {
 
         <UButton label="Search..." type="submit">
           <template #trailing>
-            <UIcon name="i-heroicons-paper-airplane" class="w-5 h-5" /> </template
+            <UIcon
+              name="i-heroicons-paper-airplane"
+              class="w-5 h-5"
+            /> </template
         ></UButton>
       </form>
     </div>
