@@ -40,7 +40,7 @@ const convertedForecast = forecastday.map((day: forecastProps) => ({
     <div
       v-for="{ day, date, temp, humidity, condition } in convertedForecast"
       :key="date"
-      class="p-4 flex flex-col border border-gray-300 rounded-md shadow-md w-64 items-center hover:scale-105 duration-300 text-xl"
+      class="py-4 px-2 flex flex-col rounded-md shadow-2xl w-64 items-center hover:-translate-y-4 hover:scale-105 duration-300 text-xl"
     >
       <img :src="`https:${condition.icon}`" alt="" />
       <p>{{ day }}</p>

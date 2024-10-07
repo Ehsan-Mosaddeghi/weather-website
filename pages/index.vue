@@ -11,19 +11,14 @@ async function handleWeather() {
     loading.value = true;
     error.value = "";
 
-    const {
-      data,
-      status,
-      error: errorApi,
-    } = await useAsyncData("weather", () =>
+    const { data, status, error: errorApi } = await useAsyncData("weather", () =>
       $fetch(
         `https://api.weatherapi.com/v1/forecast.json?key=d590b84790384cc6b74135915240110&q=${city.value}&days=6&aqi=no&alerts=no`
       )
     );
     console.log(data.value);
 
-    if (status.value === "error")
-      throw new Error(errorApi.value?.data?.error?.message);
+    if (status.value === "error") throw new Error(errorApi.value?.data?.error?.message);
 
     weatherData.value = data.value;
 
@@ -40,14 +35,16 @@ async function handleWeather() {
 </script>
 
 <template>
-  <div>
+  <div
+    class="after:block after:w-full after:h-full after:top-0 after:left-0 after:bg-zinc-700 after:opacity-30 after:-z-10 after:absolute"
+  >
     <Transition name="background">
       <NuxtImg
         :src="`/${background}.jpg`"
         :key="background"
-        quality="100"
+        quality="80"
         fit="cover"
-        loading="eager"
+        loading="lazy"
         class="absolute -z-10 w-full h-svh"
       />
     </Transition>
@@ -67,24 +64,21 @@ async function handleWeather() {
           color="gray"
         />
 
-        <UButton label="Search..." type="submit" color="lime">
+        <UButton label="Search..." type="submit">
           <template #trailing>
-            <UIcon
-              name="i-heroicons-paper-airplane"
-              class="w-5 h-5"
-            /> </template
+            <UIcon name="i-heroicons-paper-airplane" class="w-5 h-5" /> </template
         ></UButton>
       </form>
     </div>
 
     <!-- <div>Name: {{ weatherData }}</div> -->
-    <!-- <Spinner v-if="loading" /> -->
 
     <Error v-if="error" :message="error" />
+    <!-- <Spinner v-if="loading" /> -->
 
     <Transition name="weather" mode="out-in">
       <Main
-        v-if="weatherData || error"
+        v-if="weatherData"
         :weatherData="weatherData"
         :key="weatherData.location.name"
       >

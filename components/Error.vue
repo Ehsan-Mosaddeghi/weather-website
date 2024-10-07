@@ -3,7 +3,7 @@ const { message } = defineProps(["message"]);
 </script>
 
 <template>
-  <div>
+  <div class="w-full text-center my-2">
     <h1>
       <span>
         {{ message }}

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-svh overflow-hidden relative font-['Londrina_Sketch','sans-sarif']">
+  <div class="min-h-svh overflow-hidden relative font-['Fredericka_the_Great',serif]">
     <slot />
   </div>
 </template>

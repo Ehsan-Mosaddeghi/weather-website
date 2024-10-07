@@ -9,7 +9,7 @@ useHead({
     },
     {
       rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Londrina+Sketch&display=swap",
+      href: "https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap",
       crossorigin: "",
     },
   ],
