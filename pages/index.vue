@@ -60,6 +60,8 @@ async function handleWeather() {
     </header>
     <div class="flex justify-center mb-8">
       <form @submit.prevent="handleWeather" class="text-center flex font-sans">
+        <!-- <Location /> -->
+
         <UInput
           :loading="loading"
           required
@@ -71,7 +73,7 @@ async function handleWeather() {
           color="gray"
         />
 
-        <UButton label="Search..." type="submit">
+        <UButton label="Search" type="submit">
           <template #trailing>
             <UIcon
               name="i-heroicons-paper-airplane"

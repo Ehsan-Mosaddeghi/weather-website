@@ -19,6 +19,7 @@ useHead({
 <template>
   <div>
     <NuxtRouteAnnouncer />
+    <CustomCursor />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
