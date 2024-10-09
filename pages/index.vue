@@ -68,29 +68,39 @@ onMounted(() => {
         format="webp"
         fit="cover"
         loading="lazy"
-        class="absolute -z-10 w-full h-svh"
+        class="absolute -z-10 w-full h-full object-top"
       />
     </Transition>
     <header class="text-center py-5">
       <h1 class="text-5xl">Weather Now</h1>
     </header>
     <div class="flex justify-center mb-8">
-      <form @submit.prevent="handleWeather" class="text-center flex font-sans">
+      <form
+        @submit.prevent="handleWeather"
+        class="text-center gap-4 flex font-sans"
+      >
         <!-- <Location /> -->
 
         <UInput
           id="search-input"
-          :loading="loading"
           required
           autofocus
-          size="xl"
+          size="md"
           placeholder="Search your city..."
           icon="i-heroicons-pencil-square"
           v-model="city"
           color="gray"
+          :loading="loading"
+          :disabled="loading"
         />
 
-        <UButton label="Search" type="submit">
+        <UButton
+          label="Search"
+          size="md"
+          variant="outline"
+          type="submit"
+          :disabled="loading"
+        >
           <template #trailing>
             <UIcon
               name="i-heroicons-paper-airplane"
@@ -121,31 +131,20 @@ onMounted(() => {
 <style scoped>
 .weather-enter-active,
 .weather-leave-active {
-  animation: bounce-in 0.6s forwards ease-in-out;
+  transition: all 0.6s ease-in-out;
 }
 .weather-enter-from,
 .weather-leave-to {
-  animation: bounce-in 0.6s reverse ease-in-out;
+  opacity: 0;
+  transform: translateX(100px);
 }
 
 .background-enter-active,
 .background-leave-active {
-  transition: all 1s linear;
+  transition: all 0.6s linear;
 }
 .background-enter-from,
 .background-leave-to {
   opacity: 0;
-}
-
-@keyframes bounce-in {
-  0% {
-    transform: translateX(100px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
 }
 </style>
