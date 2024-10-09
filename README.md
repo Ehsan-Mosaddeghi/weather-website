@@ -1,4 +1,4 @@
-## Live demo: https://weather-w.vercel.app
+## Live demo: 🔴 https://weather-w.vercel.app
 
 # Nuxt 3 Minimal Starter
 
