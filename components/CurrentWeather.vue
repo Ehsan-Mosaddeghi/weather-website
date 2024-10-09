@@ -27,7 +27,17 @@ const {
       <span>
         {{ condition.text }}
       </span>
-      <img :src="`https:${condition.icon}`" :alt="condition.text" />
+      <NuxtImg
+        :src="`https:${condition.icon}`"
+        :alt="condition.text"
+        :key="condition.icon"
+        :placeholder="[50, 25, 50, 5]"
+        quality="80"
+        width="50"
+        height="50"
+        format="webp"
+        loading="lazy"
+      />
     </p>
   </div>
 </template>

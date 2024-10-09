@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 const { weatherData } = defineProps(["weatherData"]);
 
-console.log(weatherData);
 const {
   location: { name, country, localtime },
 } = weatherData;

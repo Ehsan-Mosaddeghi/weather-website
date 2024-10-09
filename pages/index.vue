@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-const city = ref("");
+const city = ref("Tehran");
 
 const weatherData: any = ref(null);
 const loading = ref(false);
 const error: any = ref("");
-const background = ref("bg-main");
+const background = ref("");
 
 async function handleWeather() {
   try {
@@ -37,14 +37,30 @@ async function handleWeather() {
     loading.value = false;
   }
 }
+
+function focusSearchInput() {
+  const searchInput: any = document.querySelector("#search-input");
+  searchInput?.focus();
+}
+
+onNuxtReady(() => {
+  handleWeather();
+});
+
+onMounted(() => {
+  window.addEventListener("keydown", (e) => {
+    e.key === "Enter" && focusSearchInput();
+  });
+});
 </script>
 
 <template>
   <div
     class="after:block after:w-full after:h-full after:top-0 after:left-0 after:bg-zinc-700 after:opacity-30 after:-z-10 after:absolute"
   >
-    <Transition name="background">
+    <Transition name="background" mode="out-in">
       <NuxtImg
+        v-if="background"
         :src="`/${background}.jpg`"
         :key="background"
         :placeholder="[50, 25, 50, 5]"
@@ -63,6 +79,7 @@ async function handleWeather() {
         <!-- <Location /> -->
 
         <UInput
+          id="search-input"
           :loading="loading"
           required
           autofocus
@@ -104,19 +121,16 @@ async function handleWeather() {
 <style scoped>
 .weather-enter-active,
 .weather-leave-active {
-  /* transition: all 1s ease-in-out; */
-  animation: bounce-in 0.5s;
+  animation: bounce-in 0.6s forwards ease-in-out;
 }
 .weather-enter-from,
 .weather-leave-to {
-  /* opacity: 0; */
-  /* transform: rotateY(180deg); */
-  animation: bounce-in 0.5s reverse;
+  animation: bounce-in 0.6s reverse ease-in-out;
 }
 
 .background-enter-active,
 .background-leave-active {
-  transition: all 2s linear;
+  transition: all 1s linear;
 }
 .background-enter-from,
 .background-leave-to {
