@@ -68,7 +68,7 @@ onMounted(() => {
         format="webp"
         fit="cover"
         loading="lazy"
-        class="absolute -z-10 w-full h-full object-top"
+        class="absolute -z-10 w-full h-full object-top object-cover"
       />
     </Transition>
     <header class="text-center py-5">
