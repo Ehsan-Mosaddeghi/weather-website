@@ -20,7 +20,6 @@ async function handleWeather() {
         `https://api.weatherapi.com/v1/forecast.json?key=d590b84790384cc6b74135915240110&q=${city.value}&days=6&aqi=no&alerts=no`
       )
     );
-    console.log(data.value);
 
     if (status.value === "error")
       throw new Error(errorApi.value?.data?.error?.message);
