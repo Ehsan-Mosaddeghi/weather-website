@@ -1,15 +1,49 @@
 <script lang="ts" setup>
+const tempUnit = ref("celsius");
 const { weatherData } = defineProps(["weatherData"]);
 
 const {
-  current: { temp_c: temp, wind_mph: wind, humidity, condition },
+  current: {
+    temp_c: tempC,
+    temp_f: tempF,
+    wind_mph: wind,
+    humidity,
+    condition,
+  },
 } = weatherData;
 </script>
 
 <template>
   <div class="space-y-10">
-    <div class="flex justify-center items-end">
-      <h1 class="text-8xl">{{ formatTemp(temp) }}</h1>
+    <div class="flex justify-center items-end gap-4">
+      <div class="place-self-center flex flex-col sm:flex-row gap-2 text-xl">
+        <button
+          @click="() => (tempUnit = 'celsius')"
+          class="px-2 hover:text-blue-400 hover:bg-yellow-300 duration-300 rounded-md cursor-none"
+          :class="{ 'ring-2': tempUnit === 'celsius' }"
+        >
+          C
+        </button>
+        <span class="hidden sm:block">|</span>
+        <button
+          @click="() => (tempUnit = 'fahrenheit')"
+          class="px-2 hover:text-blue-400 hover:bg-yellow-300 duration-300 rounded-md cursor-none"
+          :class="{ 'ring-2': tempUnit === 'fahrenheit' }"
+        >
+          F
+        </button>
+      </div>
+
+      <Transition name="tempUnit" mode="out-in">
+        <div :key="tempUnit" class="min-w-56 text-center">
+          <h1 class="text-8xl" v-if="tempUnit === 'celsius'">
+            {{ formatTempC(tempC) }}
+          </h1>
+          <h1 class="text-8xl" v-if="tempUnit === 'fahrenheit'">
+            {{ formatTempF(tempF) }}
+          </h1>
+        </div>
+      </Transition>
 
       <div class="text-2xl">
         <p>
@@ -41,3 +75,19 @@ const {
     </p>
   </div>
 </template>
+
+<style scoped>
+.tempUnit-enter-active,
+.tempUnit-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+.tempUnit-enter-from {
+  opacity: 0;
+  transform: translateY(80px);
+}
+
+.tempUnit-leave-to {
+  opacity: 0;
+  transform: translateY(-80px);
+}
+</style>

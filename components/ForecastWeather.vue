@@ -44,7 +44,7 @@ const convertedForecast = forecastday.map((day: forecastProps) => ({
     >
       <img :src="`https:${condition.icon}`" alt="" />
       <p>{{ day }}</p>
-      <p>{{ formatTemp(temp) }}</p>
+      <p>{{ formatTempC(temp) }}</p>
       <p>{{ humidity }}%</p>
       <p>{{ condition.text }}</p>
       <p>{{ date }}</p>

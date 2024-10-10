@@ -79,8 +79,6 @@ onMounted(() => {
         @submit.prevent="handleWeather"
         class="text-center gap-4 flex font-sans"
       >
-        <!-- <Location /> -->
-
         <UInput
           id="search-input"
           required
@@ -110,10 +108,7 @@ onMounted(() => {
       </form>
     </div>
 
-    <!-- <div>Name: {{ weatherData }}</div> -->
-
     <Error v-if="error" :message="error" />
-    <!-- <Spinner v-if="loading" /> -->
 
     <Transition name="weather" mode="out-in">
       <Main
