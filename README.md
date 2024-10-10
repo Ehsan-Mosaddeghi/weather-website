@@ -1,4 +1,5 @@
 ## Live demo: 🔴 https://weather-w.vercel.app
+### Built with Nuxt3 and Nuxt UI
 
 # Nuxt 3 Minimal Starter
 
