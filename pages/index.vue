@@ -25,6 +25,7 @@ async function handleWeather() {
       throw new Error(errorApi.value?.data?.error?.message);
 
     weatherData.value = data.value;
+    console.log(data.value);
 
     weatherData.value?.current?.cloud <= 10
       ? (background.value = "bg-sunny")

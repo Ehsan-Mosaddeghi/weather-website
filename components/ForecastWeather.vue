@@ -5,15 +5,7 @@ const {
   forecast: { forecastday },
 } = weatherData;
 
-const weekDays = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 interface forecastProps {
   date: string;
@@ -36,7 +28,7 @@ const convertedForecast = forecastday.map((day: forecastProps) => ({
 </script>
 
 <template>
-  <div class="flex justify-center flex-wrap gap-2 mt-20">
+  <div class="flex justify-center flex-wrap gap-y-8 gap-2 mt-20">
     <div
       v-for="{ day, date, temp, humidity, condition } in convertedForecast"
       :key="date"
